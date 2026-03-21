@@ -1,4 +1,4 @@
-package bibl;
+package bibl.books;
 
 public class PhysicalBook extends Book {
     private String shelfLocation;

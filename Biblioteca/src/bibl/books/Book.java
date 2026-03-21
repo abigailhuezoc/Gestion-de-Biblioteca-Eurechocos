@@ -1,4 +1,4 @@
-package bibl;
+package bibl.books;
 
 public class Book {
     private String title;
@@ -58,7 +58,8 @@ public class Book {
         this.publicationYear= publicationYear;
     }
     public void setInventory(int inventory){
-        this.inventory=inventory;
+        this.inventory=inventory}
+
     public void setBorrowed(boolean borrowed) {
         this.borrowed = borrowed;
     }
@@ -76,8 +77,8 @@ public class Book {
             System.out.println("El libro '" + title + "' ha sido devuelto.");
         } else {
             System.out.println("El libro '" + title + "' no estaba prestado.");
-        }
-    public void showInfo() {
+        }}
+    public void showInfo(){
         System.out.println("Título: " + title);
         System.out.println("Autor: " + author);
         System.out.println("ISBN: " + isbn);
