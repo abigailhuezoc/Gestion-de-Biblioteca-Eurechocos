@@ -18,74 +18,80 @@ public class Book {
         this.inventory = inventory;
         this.borrowed = false;
         
+    public Book(String title, String author, String isbn, String genre, int publicationYear, int inventory, boolean borrowed) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+        this.genre = genre;
+        this.publicationYear = publicationYear;
+        this.inventory = inventory;
+        this.borrowed = borrowed;
     }
-    public String getTitle() {
-        return title;
+    public void toReceive() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("¿Cuál es el título del libro?");
+        this.title = sc.nextLine();
+
+        System.out.println("¿Quién es el autor del libro?");
+        this.author = sc.nextLine();
+
+        System.out.println("¿Cuál es su código de identificación?");
+        this.isbn = sc.nextLine();
+
+        System.out.println("¿Cuál es el género del libro?");
+        this.genre = sc.nextLine();
+
+        System.out.println("¿Cuál es el año de publicación del libro?");
+        this.publicationYear = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("¿Cuántas existencias hay del libro?");
+        this.inventory = sc.nextInt();
+        sc.nextLine();
+
+        this.borrowed = false;
     }
-    public String getAuthor() {
-        return author;
-    }
-    public String getIsbn() {
-        return isbn;
-    }
-    public String getGenre() {
-        return genre;
-    }
-    public int getPublicationYear() {
-        return publicationYear;
-    }
-    public int getInventory() {
-        return inventory;
-    }
-    public boolean isBorrowed(){
+    public void available(int inventory, boolean borrowed){
+        if(inventory > 0) {
+            this.borrowed = borrowed;
+        }}
+
+    public boolean isBorrowed() {
         return borrowed;
     }
 
-    
-    public void setTitle(String title){
-        this.title =title;
+    public String getTitle() {
+        return title;
     }
-    public void setAuthor(String author){
-        this.author = author;
+
+    public String getAuthor() {
+        return author;
     }
-    public void setIsbn(String isbn){
-        this.isbn=isbn;
+
+    public String getIsbn() {
+        return isbn;
     }
-    public void setGenre(String genre){
-        this.genre=genre;
+
+    public String getGenre() {
+        return genre;
     }
-    public void setPublicationYear(int publicationYear){
-        this.publicationYear= publicationYear;
+
+    public int getPublicationYear() {
+        return publicationYear;
     }
-    public void setInventory(int inventory){
-        this.inventory=inventory}
+
+    public int getInventory() {
+        return inventory;
+
+    }
+
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
+    }
 
     public void setBorrowed(boolean borrowed) {
         this.borrowed = borrowed;
     }
-    public void toLend() {
-        if (!borrowed) {
-            borrowed = true;
-            System.out.println("El libro '" + title + "' ha sido prestado.");
-        } else {
-            System.out.println("El libro '" + title + "' ya está prestado.");
-        }
-    }
-    public void toReturn() {
-        if (borrowed) {
-            borrowed = false;
-            System.out.println("El libro '" + title + "' ha sido devuelto.");
-        } else {
-            System.out.println("El libro '" + title + "' no estaba prestado.");
-        }}
-    public void showInfo(){
-        System.out.println("Título: " + title);
-        System.out.println("Autor: " + author);
-        System.out.println("ISBN: " + isbn);
-        System.out.println("Género: " + genre);
-        System.out.println("Año: " + publicationYear);
-        System.out.println("Estado: " + (borrowed ? "Prestado" : "Disponible"));
-        System.out.println("Inventario: " + inventory);
-    }
-    
 }
+
