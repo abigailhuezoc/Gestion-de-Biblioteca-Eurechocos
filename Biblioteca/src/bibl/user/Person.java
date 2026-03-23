@@ -1,8 +1,8 @@
 package bibl.user;
-
 import java.time.LocalDate;
 
-public class Person {
+
+public abstract class Person {
     private String name;
     private String lastName;
     private LocalDate dateOfBirth;
@@ -15,7 +15,18 @@ public class Person {
         this.setGender(gender);
         this.setDui(dui);
         this.setDateOfBirth(dateOfBirth);
+        System.out.println("Persona creada exitosamente");
     }
+
+    // Metodos
+    public void showInformation (){
+        System.out.println("Nombre completo: " + this.name + " " + this.lastName);
+        System.out.println("Fecha de nacimiento: " + this.dateOfBirth);
+        System.out.println("Género: " + this.gender);
+        System.out.println("Dui: " + this.dui);
+    }
+
+    public abstract String createCarne ();
 
     //GETTERS
     public String getName() {

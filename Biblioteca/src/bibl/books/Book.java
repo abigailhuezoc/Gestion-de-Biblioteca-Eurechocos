@@ -1,6 +1,8 @@
 package bibl.books;
 
-public class Book {
+import java.util.Scanner;
+
+public abstract class Book {
     private String title;
     private String author;
     private String isbn;
@@ -9,7 +11,7 @@ public class Book {
     private int inventory;
     private boolean borrowed;
 
-    public Book (String title, String author,  String isbn, String genre, int publicationYear, int inventory){
+    public Book (String title, String author, String isbn, String genre, int publicationYear, int inventory) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
@@ -17,16 +19,9 @@ public class Book {
         this.publicationYear = publicationYear;
         this.inventory = inventory;
         this.borrowed = false;
-        
-    public Book(String title, String author, String isbn, String genre, int publicationYear, int inventory, boolean borrowed) {
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.genre = genre;
-        this.publicationYear = publicationYear;
-        this.inventory = inventory;
-        this.borrowed = borrowed;
     }
+
+    /*
     public void toReceive() {
         Scanner sc = new Scanner(System.in);
 
@@ -51,11 +46,23 @@ public class Book {
         sc.nextLine();
 
         this.borrowed = false;
-    }
+    } */
+
     public void available(int inventory, boolean borrowed){
         if(inventory > 0) {
             this.borrowed = borrowed;
         }}
+
+    public void showInfo (){
+        System.out.println("Título: " + this.title);
+        System.out.println("Autor: " + this.author);
+        System.out.println("ISBN: " + this.isbn);
+        System.out.println("Género: " + this.genre);
+        System.out.println("Año de publicación: " + this.publicationYear);
+        System.out.println("Inventario: " + this.inventory);
+
+        System.out.println("Estado: " + (this.borrowed ? "Prestado" : "Disponible"));
+    }
 
     public boolean isBorrowed() {
         return borrowed;

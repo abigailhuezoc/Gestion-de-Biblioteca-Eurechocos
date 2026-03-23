@@ -1,5 +1,5 @@
 package bibl;
-import bibl.Book;
+import bibl.books.Book;
 
 import java.util.ArrayList;
 import java.util.List;
