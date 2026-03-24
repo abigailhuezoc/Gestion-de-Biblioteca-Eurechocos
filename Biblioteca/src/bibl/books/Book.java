@@ -1,7 +1,5 @@
 package bibl.books;
 
-import java.util.Scanner;
-
 public abstract class Book {
     private String title;
     private String author;
@@ -10,15 +8,16 @@ public abstract class Book {
     private int publicationYear;
     private int inventory;
     private boolean borrowed;
-    //page count
+    private int pageCount; // Nuevo atributo agregado
 
-    public Book(String title, String author, String isbn, String genre, int publicationYear, int inventory) {
+    public Book(String title, String author, String isbn, String genre, int publicationYear, int inventory, int pageCount) {
         this.setTitle(title);
         this.setAuthor(author);
         this.setIsbn(isbn);
         this.setGenre(genre);
         this.setPublicationYear(publicationYear);
         this.setInventory(inventory);
+        this.setPageCount(pageCount);
 
         // El estado prestado se calcula automáticamente basándose en el inventario
         this.setBorrowed(inventory == 0);
@@ -26,41 +25,12 @@ public abstract class Book {
         System.out.println("Libro creado exitosamente");
     }
 
-    /*
-    public void toReceive() {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("¿Cuál es el título del libro?");
-        this.title = sc.nextLine();
-
-        System.out.println("¿Quién es el autor del libro?");
-        this.author = sc.nextLine();
-
-        System.out.println("¿Cuál es su código de identificación?");
-        this.isbn = sc.nextLine();
-
-        System.out.println("¿Cuál es el género del libro?");
-        this.genre = sc.nextLine();
-
-        System.out.println("¿Cuál es el año de publicación del libro?");
-        this.publicationYear = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("¿Cuántas existencias hay del libro?");
-        this.inventory = sc.nextInt();
-        sc.nextLine();
-
-        this.borrowed = false;
-    } */
-
-    /*public void available(int inventory, boolean borrowed){
-        if(inventory > 0) {
-            this.borrowed = borrowed;
-        }}*/
+    // METODOS
 
     public void toLend() {
         if (this.inventory > 0) {
             this.inventory--;
+            // Si al prestarlo nos quedamos en 0, se marca como prestado (no disponible)
             if (this.inventory == 0) {
                 this.borrowed = true;
             }
@@ -71,22 +41,24 @@ public abstract class Book {
 
     public void toReturn() {
         this.inventory++;
-
+        // Como ahora hay al menos 1 en inventario, vuelve a estar disponible
         this.borrowed = false;
     }
 
-    public void showInfo (){
+    public void showInfo() {
         System.out.println("Título: " + this.title);
         System.out.println("Autor: " + this.author);
         System.out.println("ISBN: " + this.isbn);
         System.out.println("Género: " + this.genre);
         System.out.println("Año de publicación: " + this.publicationYear);
+        System.out.println("Número de páginas: " + this.pageCount);
         System.out.println("Inventario: " + this.inventory);
 
+        // Muestra el estado en texto legible en lugar de true/false
         System.out.println("Estado: " + (this.borrowed ? "Prestado" : "Disponible"));
     }
 
-    //GETTERS
+    // GETTERS
 
     public String getTitle() { return title; }
     public String getAuthor() { return author; }
@@ -95,11 +67,11 @@ public abstract class Book {
     public int getPublicationYear() { return publicationYear; }
     public int getInventory() { return inventory; }
     public boolean isBorrowed() { return borrowed; }
+    public int getPageCount() { return pageCount; }
 
-    //SETTERS
+    // SETTERS
 
     public void setTitle(String title) {
-
         if (title != null && !title.trim().isEmpty()) {
             this.title = title.trim();
         } else {
@@ -152,5 +124,12 @@ public abstract class Book {
         this.borrowed = borrowed;
     }
 
+    public void setPageCount(int pageCount) {
+        // Un libro debe tener al menos 1 página
+        if (pageCount > 0) {
+            this.pageCount = pageCount;
+        } else {
+            System.out.println("Error: El número de páginas debe ser mayor a 0.");
+        }
+    }
 }
-

@@ -1,7 +1,6 @@
 package bibl.user;
 import java.time.LocalDate;
 
-
 public abstract class Person {
     private String name;
     private String lastName;
@@ -19,16 +18,17 @@ public abstract class Person {
     }
 
     // Metodos
-    public void showInformation (){
+    public void showInformation() {
         System.out.println("Nombre completo: " + this.name + " " + this.lastName);
         System.out.println("Fecha de nacimiento: " + this.dateOfBirth);
         System.out.println("Género: " + this.gender);
-        System.out.println("Dui: " + this.dui);
+        System.out.println("DUI: " + this.dui);
     }
 
-    public abstract String createCarne ();
+    // Metodo abstracto que obliga a las clases hijas a definir como crear el carnet
+    public abstract String createCarne();
 
-    //GETTERS
+    // GETTERS
     public String getName() {
         return name;
     }
@@ -49,30 +49,39 @@ public abstract class Person {
         return gender;
     }
 
-    //SETTERS
-
+    // SETTERS
     public void setName(String name) {
-        if (name != null){
-            this.name = name;}
+        // Evita valores nulos y cadenas de texto vacias o con solo espacios
+        if (name != null && !name.trim().isEmpty()) {
+            this.name = name.trim();
+        }
     }
 
     public void setLastName(String lastName) {
-        if (lastName != null){
-            this.lastName = lastName;
+        if (lastName != null && !lastName.trim().isEmpty()) {
+            this.lastName = lastName.trim();
         }
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        if (dateOfBirth != null) {
+            this.dateOfBirth = dateOfBirth;
+        }
     }
 
     public void setGender(Gender gender) {
-        this.gender = gender;
+        if (gender != null) {
+            this.gender = gender;
+        }
     }
 
     public void setDui(String dui) {
-        if (dui.length() == 9){
+        // Verifica que no sea nulo antes de medir su longitud para evitar caídas del sistema
+        // Soporta 9 digitos (sin guion) o 10 digitos (con guion)
+        if (dui != null && (dui.length() == 9 || dui.length() == 10)) {
             this.dui = dui;
+        } else {
+            System.out.println("Error: Formato de DUI invalido.");
         }
     }
 }
