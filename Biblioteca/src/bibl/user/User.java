@@ -5,30 +5,28 @@ import java.time.Year;
 import java.util.Random;
 
 public class User extends Person {
+
+    // ATRIBUTOS
     private LocalDate dateOfCreation;
     private String cellphone;
     private String email;
-    private String userId; // Solo se declara, se calcula en el constructor
+    private String userId;
 
+    // CONSTRUCTOR
     public User(String name, String lastName, Gender gender, String dui, LocalDate dateOfBirth, LocalDate dateOfCreation, String cellphone, String email) {
-        // 1. Llama a la clase padre, esto asigna el nombre, apellido, etc.
         super(name, lastName, gender, dui, dateOfBirth);
 
-        // 2. Usamos los setters de esta clase para validar los nuevos datos
         this.setDateOfCreation(dateOfCreation);
         this.setCellphone(cellphone);
         this.setEmail(email);
 
-        // 3. Generamos el carnet ahora, porque la clase padre ya guardó el nombre
         this.userId = createCarne();
-
-        System.out.println("Usuario creado exitosamente");
     }
 
-    // Metodos
+    // METODOS
     @Override
     public void showInformation() {
-        super.showInformation(); // Muestra la informacion base (nombre, DUI, etc.)
+        super.showInformation();
         System.out.println("Carnet (User ID): " + this.userId);
         System.out.println("Email: " + this.email);
         System.out.println("Celular: " + this.cellphone);
@@ -40,13 +38,10 @@ public class User extends Person {
         String year = String.valueOf(Year.now().getValue());
         String name = this.getName();
 
-        // Validamos la longitud del nombre para evitar errores al cortar el texto
         String letters;
         if (name.length() >= 2) {
-            // Si el nombre tiene 2 o más letras, cortamos las primeras dos
             letters = name.substring(0, 2).toUpperCase();
         } else {
-            // Si tiene solo 1 letra, la usamos toda
             letters = name.toUpperCase();
         }
 
@@ -59,25 +54,13 @@ public class User extends Person {
     }
 
     // GETTERS
-    public LocalDate getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public String getCellphone() {
-        return cellphone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
+    public LocalDate getDateOfCreation() { return dateOfCreation; }
+    public String getCellphone() { return cellphone; }
+    public String getEmail() { return email; }
+    public String getUserId() { return userId; }
 
     // SETTERS
     public void setDateOfCreation(LocalDate dateOfCreation) {
-        // Si por error envian null, asignamos la fecha de hoy por defecto
         if (dateOfCreation != null) {
             this.dateOfCreation = dateOfCreation;
         } else {
@@ -89,7 +72,7 @@ public class User extends Person {
         if (cellphone != null && !cellphone.trim().isEmpty()) {
             this.cellphone = cellphone.trim();
         } else {
-            System.out.println("Error: El celular no puede estar vacio.");
+            throw new IllegalArgumentException("El celular no puede estar vacío.");
         }
     }
 
@@ -97,7 +80,7 @@ public class User extends Person {
         if (email != null && !email.trim().isEmpty()) {
             this.email = email.trim();
         } else {
-            System.out.println("Error: El email no puede estar vacio.");
+            throw new IllegalArgumentException("El email no puede estar vacío.");
         }
     }
 }

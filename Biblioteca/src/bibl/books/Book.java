@@ -1,6 +1,7 @@
 package bibl.books;
 
 public abstract class Book {
+
     private String title;
     private String author;
     private String isbn;
@@ -8,9 +9,11 @@ public abstract class Book {
     private int publicationYear;
     private int inventory;
     private boolean borrowed;
-    private int pageCount; // Nuevo atributo agregado
+    private int pageCount;
+
 
     public Book(String title, String author, String isbn, String genre, int publicationYear, int inventory, int pageCount) {
+
         this.setTitle(title);
         this.setAuthor(author);
         this.setIsbn(isbn);
@@ -19,29 +22,23 @@ public abstract class Book {
         this.setInventory(inventory);
         this.setPageCount(pageCount);
 
-        // El estado prestado se calcula automáticamente basándose en el inventario
-        this.setBorrowed(inventory == 0);
-
-        System.out.println("Libro creado exitosamente");
+        this.setBorrowed(this.inventory == 0);
     }
 
-    // METODOS
 
     public void toLend() {
         if (this.inventory > 0) {
             this.inventory--;
-            // Si al prestarlo nos quedamos en 0, se marca como prestado (no disponible)
             if (this.inventory == 0) {
                 this.borrowed = true;
             }
         } else {
-            System.out.println("Operación denegada: No hay inventario disponible.");
+            throw new IllegalStateException("Operación denegada: No hay inventario disponible para prestar.");
         }
     }
 
     public void toReturn() {
         this.inventory++;
-        // Como ahora hay al menos 1 en inventario, vuelve a estar disponible
         this.borrowed = false;
     }
 
@@ -53,12 +50,9 @@ public abstract class Book {
         System.out.println("Año de publicación: " + this.publicationYear);
         System.out.println("Número de páginas: " + this.pageCount);
         System.out.println("Inventario: " + this.inventory);
-
-        // Muestra el estado en texto legible en lugar de true/false
         System.out.println("Estado: " + (this.borrowed ? "Prestado" : "Disponible"));
     }
 
-    // GETTERS
 
     public String getTitle() { return title; }
     public String getAuthor() { return author; }
@@ -69,13 +63,13 @@ public abstract class Book {
     public boolean isBorrowed() { return borrowed; }
     public int getPageCount() { return pageCount; }
 
-    // SETTERS
 
     public void setTitle(String title) {
         if (title != null && !title.trim().isEmpty()) {
             this.title = title.trim();
         } else {
-            System.out.println("Error: El título no puede ser nulo o estar vacío.");
+            // ¡ESTO ABORTA LA CREACIÓN!
+            throw new IllegalArgumentException("El título no puede ser nulo o estar vacío.");
         }
     }
 
@@ -83,7 +77,7 @@ public abstract class Book {
         if (author != null && !author.trim().isEmpty()) {
             this.author = author.trim();
         } else {
-            System.out.println("Error: El autor no puede ser nulo o estar vacío.");
+            throw new IllegalArgumentException("El autor no puede ser nulo o estar vacío.");
         }
     }
 
@@ -91,7 +85,7 @@ public abstract class Book {
         if (isbn != null && !isbn.trim().isEmpty()) {
             this.isbn = isbn.trim();
         } else {
-            System.out.println("Error: El ISBN no puede ser nulo o estar vacío.");
+            throw new IllegalArgumentException("El ISBN no puede ser nulo o estar vacío.");
         }
     }
 
@@ -99,7 +93,7 @@ public abstract class Book {
         if (genre != null && !genre.trim().isEmpty()) {
             this.genre = genre.trim();
         } else {
-            System.out.println("Error: El género no puede ser nulo o estar vacío.");
+            throw new IllegalArgumentException("El género no puede ser nulo o estar vacío.");
         }
     }
 
@@ -107,7 +101,7 @@ public abstract class Book {
         if (publicationYear > 0) {
             this.publicationYear = publicationYear;
         } else {
-            System.out.println("Error: El año de publicación debe ser mayor a 0.");
+            throw new IllegalArgumentException("El año de publicación debe ser mayor a 0.");
         }
     }
 
@@ -116,7 +110,7 @@ public abstract class Book {
             this.inventory = inventory;
             this.borrowed = (this.inventory == 0);
         } else {
-            System.out.println("Error: El inventario no puede ser un número negativo.");
+            throw new IllegalArgumentException("El inventario no puede ser un número negativo.");
         }
     }
 
@@ -125,11 +119,10 @@ public abstract class Book {
     }
 
     public void setPageCount(int pageCount) {
-        // Un libro debe tener al menos 1 página
         if (pageCount > 0) {
             this.pageCount = pageCount;
         } else {
-            System.out.println("Error: El número de páginas debe ser mayor a 0.");
+            throw new IllegalArgumentException("El número de páginas debe ser mayor a 0.");
         }
     }
 }
