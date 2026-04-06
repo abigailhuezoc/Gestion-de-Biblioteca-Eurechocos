@@ -21,6 +21,6 @@ Este proyecto es un sistema interactivo basado en consola desarrollado en JAVA. 
 * **Encapsulamiento:** Protección de los atributos de las clases, accediendo a ellos mediante getters y setters.
 * **Enumeraciones (`enum`):** Uso de `BookStatus` para un control seguro del estado de los libros (ej. DISPONIBLE, PRESTADO).
 * **Colecciones:** Uso de estructuras de datos dinámicas para el filtrado y gestión de préstamos.
-
+* **Manejo de Errores:** Implementación de validaciones y excepciones para evitar caídas del sistema en la consola.
 
 
