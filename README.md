@@ -17,5 +17,5 @@ Este proyecto es un sistema interactivo basado en consola desarrollado en JAVA. 
 
 ## Conceptos de POO y Java Aplicados:
 * **Herencia (`extends`):** * Clase base `Book` con subclases específicas `PhysicalBook` y `DigitalBook`.
-* **Polimorfismo:** Sobreescritura de métodos para comportamientos específicos según el tipo de objeto.
+* **Polimorfismo:** Overwrite de métodos para comportamientos específicos según el tipo de objeto.
 
