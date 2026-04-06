@@ -11,3 +11,6 @@ Este proyecto es un sistema interactivo basado en consola desarrollado en JAVA. 
 * **Persistencia de Datos:** La información se guarda y se carga de forma automática para evitar la pérdida de datos entre sesiones.
 
 ## Diseño
+1. **Modelo:** Contiene las entidades principales y la lógica de negocio.
+2. **Servicios:** Maneja la lógica de operaciones como búsquedas, generación de reportes y validaciones.
+3. **Presentación:** Interfaz por consola para la interacción con el bibliotecario o usuario.
