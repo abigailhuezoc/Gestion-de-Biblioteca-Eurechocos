@@ -16,6 +16,6 @@ Este proyecto es un sistema interactivo basado en consola desarrollado en JAVA. 
 3. **Presentación:** Interfaz por consola para la interacción con el bibliotecario o usuario.
 
 ## Conceptos de POO y Java Aplicados:
-* **Herencia (`extends`):** * Clase base `Book` con subclases específicas `PhysicalBook` y `DigitalBook`.
+* **Herencia (`extends`):** Clase main `Book` con subclases específicas `PhysicalBook`,`DigitalBook`.
 * **Polimorfismo:** Overwrite de métodos para comportamientos específicos según el tipo de objeto.
 
