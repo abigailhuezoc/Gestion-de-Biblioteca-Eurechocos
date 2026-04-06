@@ -133,7 +133,13 @@ public class Main {
                         System.out.print("Escribe el titulo del libro que vas a devolver: ");
                         String returnTitle = scanner.nextLine();
 
-                        loanService.returnLoanByBookTitle(returnTitle);
+                        System.out.print("Ingrese el ID del usuario (Carnet): ");
+                        String userId = scanner.nextLine();
+
+                        // Ahora enviamos ambos parámetros al servicio
+                        loanService.returnLoanByBookTitle(returnTitle, userId);
+
+                        System.out.println("Operación realizada con éxito.");
                     } catch (Exception e) {
                         System.out.println("Error en la devolucion: " + e.getMessage());
                     }

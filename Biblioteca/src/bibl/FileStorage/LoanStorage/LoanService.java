@@ -83,20 +83,23 @@ public class LoanService implements ILoanService {
     /**Busca un préstamo activo por el título del libro para marcar su devolución
      */
     @Override
-    public void returnLoanByBookTitle(String title) {
+    public void returnLoanByBookTitle(String title, String userId) {
         boolean found = false;
 
         for (Loan loan : this.lendList) {
-            // Buscamos solo en los activos que coincidan con el título
-            if (loan.isActive() && loan.getBook().getTitle().equalsIgnoreCase(title)) {
+            if (loan.isActive() &&
+                    loan.getBook().getTitle().equalsIgnoreCase(title) &&
+                    loan.getUser().getUserId().equalsIgnoreCase(userId)) {
+
                 loan.returnBook();
                 found = true;
-                break; // Terminamos al encontrar el primero
+                break;
             }
         }
 
         if (!found) {
-            throw new java.util.NoSuchElementException("No se encontro un prestamo activo para el libro: " + title);
+            throw new java.util.NoSuchElementException("No se encontró un préstamo activo para el libro '"
+                    + title + "' asociado al usuario '" + userId + "'.");
         }
     }
 

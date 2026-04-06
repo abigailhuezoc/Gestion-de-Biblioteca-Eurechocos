@@ -9,6 +9,6 @@ public interface ILoanService {
     void registerLoan(Loan prestamo);
     void showLendBooks();
     void createLoanReport();
-    void returnLoanByBookTitle(String title);
+    void returnLoanByBookTitle(String title, String userId);
     List<Loan> getLendList();
 }
