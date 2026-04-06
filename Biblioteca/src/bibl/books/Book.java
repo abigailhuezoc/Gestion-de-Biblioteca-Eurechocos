@@ -28,8 +28,10 @@ public abstract class Book {
 
         this.setBorrowed(this.inventory == 0);
     }
-
-
+    /**
+     * Lógica para prestar un libro
+     * Resta una unidad y si llegamos a cero, cambia el estado a "prestado"
+     */
     public void toLend() {
         if (this.inventory > 0) {
             this.inventory--;
@@ -37,10 +39,14 @@ public abstract class Book {
                 this.borrowed = true;
             }
         } else {
+            // Si alguien intenta prestar sin stock, lanzamos error para no romper la lógica
             throw new IllegalStateException("Operación denegada: No hay inventario disponible para prestar.");
         }
     }
-
+    /**
+     * Para cuando devuelven el libro
+     * Sumamos al stock y nos aseguramos de que ya no figure como "prestado"
+     */
     public void toReturn() {
         this.inventory++;
         this.borrowed = false;
@@ -57,7 +63,7 @@ public abstract class Book {
         System.out.println("Estado: " + (this.borrowed ? "Prestado" : "Disponible"));
     }
 
-
+    // --- Getters ---
     public String getTitle() { return title; }
     public String getAuthor() { return author; }
     public String getIsbn() { return isbn; }
@@ -67,7 +73,8 @@ public abstract class Book {
     public boolean isBorrowed() { return borrowed; }
     public int getPageCount() { return pageCount; }
 
-
+    // --- Setters para validaciones ---
+    // Estas validaciones evitan que el objeto tenga datos basura
     public void setTitle(String title) {
         if (title != null && !title.trim().isEmpty()) {
             this.title = title.trim();
@@ -102,6 +109,7 @@ public abstract class Book {
     }
 
     public void setPublicationYear(int publicationYear) {
+        // No se aceptan años negativos o cero
         if (publicationYear > 0) {
             this.publicationYear = publicationYear;
         } else {
@@ -112,6 +120,7 @@ public abstract class Book {
     public void setInventory(int inventory) {
         if (inventory >= 0) {
             this.inventory = inventory;
+            // Si actualizamos el inventario a mano, el estado 'borrowed' debe ser coherente
             this.borrowed = (this.inventory == 0);
         } else {
             throw new IllegalArgumentException("El inventario no puede ser un número negativo.");
