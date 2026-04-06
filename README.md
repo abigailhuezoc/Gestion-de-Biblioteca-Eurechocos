@@ -8,4 +8,4 @@ Este proyecto es un sistema interactivo basado en consola desarrollado en JAVA. 
 * **Sistema de Préstamos y Devoluciones:** Permite asignar libros a usuarios (y valida previamente que no se encuentren prestados) actualizando automáticamente el estado del libro en el sistema.
 * **Búsqueda:** Búsqueda de libros por coincidencias de título o autor.
 * **Control y Monitoreo:** Se pueden visualizar todos los libros actualmente prestados (con usuario y fecha).
-* **Persistencia de Datos (HU-07):** Guardado y carga automática de la información en archivos para evitar la pérdida de datos entre sesiones.
+* **Persistencia de Datos:** La información se guarda y se carga de forma automática para evitar la pérdida de datos entre sesiones.
