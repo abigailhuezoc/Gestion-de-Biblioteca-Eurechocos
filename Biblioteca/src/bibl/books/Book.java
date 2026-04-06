@@ -1,11 +1,11 @@
 package bibl.books;
 /**
  * Clase base para cualquier libro del sistema.
- * Es abstracta porque no tiene sentido tener un "libro genérico";
+ * Aplicamos abtracción porque no tiene sentido tener un "libro genérico";
  * o es físico o es digital.
  */
 public abstract class Book {
-
+    // Aplicamos ENCAPSULAMIENTO: Atributos privados para que nadie modifique el estado interno
     private String title;
     private String author;
     private String isbn;
@@ -25,7 +25,7 @@ public abstract class Book {
         this.setPublicationYear(publicationYear);
         this.setInventory(inventory);
         this.setPageCount(pageCount);
-
+// Lógica de negocio inicial: si no hay stock, nace como prestado.
         this.setBorrowed(this.inventory == 0);
     }
     /**
@@ -74,7 +74,7 @@ public abstract class Book {
     public int getPageCount() { return pageCount; }
 
     // --- Setters para validaciones ---
-    // Estas validaciones evitan que el objeto tenga datos basura
+    //Encapsulamiento: Estas validaciones evitan que el objeto tenga datos basura
     public void setTitle(String title) {
         if (title != null && !title.trim().isEmpty()) {
             this.title = title.trim();
@@ -120,7 +120,7 @@ public abstract class Book {
     public void setInventory(int inventory) {
         if (inventory >= 0) {
             this.inventory = inventory;
-            // Si actualizamos el inventario a mano, el estado 'borrowed' debe ser coherente
+            // Sincronizamos el estado 'borrowed' con el stock real
             this.borrowed = (this.inventory == 0);
         } else {
             throw new IllegalArgumentException("El inventario no puede ser un número negativo.");
