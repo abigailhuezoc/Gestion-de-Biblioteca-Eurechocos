@@ -14,3 +14,7 @@ Este proyecto es un sistema interactivo basado en consola desarrollado en JAVA. 
 1. **Modelo:** Contiene las entidades principales y la lógica de negocio.
 2. **Servicios:** Maneja la lógica de operaciones como búsquedas, generación de reportes y validaciones.
 3. **Presentación:** Interfaz por consola para la interacción con el bibliotecario o usuario.
+
+## Conceptos de POO y Java Aplicados:
+* **Herencia (`extends`):** * Clase base `Book` con subclases específicas `PhysicalBook` y `DigitalBook`.
+
