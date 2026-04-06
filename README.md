@@ -5,7 +5,7 @@ Este proyecto es un sistema interactivo basado en consola desarrollado en JAVA. 
 # Características y funcionalidades
 * **Gestión de Catálogo:** Se registran libros con título, autor, género y año.
 * **Gestión de Usuarios:** Se registran usuarios (nombre, dui) para generar el préstamo.
-* **Sistema de Préstamos y Devoluciones (HU-03, HU-04):** Permite asignar libros a usuarios (validando que no estén previamente prestados) y procesar devoluciones, actualizando automáticamente el estado del libro.
+* **Sistema de Préstamos y Devoluciones:** Permite asignar libros a usuarios (y valida previamente que no se encuentren prestados) y procesar devoluciones, actualizando automáticamente el estado del libro.
 * **Búsqueda Avanzada (HU-05):** Búsqueda de libros por coincidencias parciales de título o autor.
 * **Control y Monitoreo (HU-06, HU-08):** Visualización de todos los libros actualmente prestados (con usuario y fecha) y generación de reportes administrativos (totales y libros más prestados).
 * **Persistencia de Datos (HU-07):** Guardado y carga automática de la información en archivos para evitar la pérdida de datos entre sesiones.
