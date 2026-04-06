@@ -1,5 +1,9 @@
 package bibl.books;
-
+/**
+ * Clase base para cualquier libro del sistema.
+ * Es abstracta porque no tiene sentido tener un "libro genérico";
+ * o es físico o es digital.
+ */
 public abstract class Book {
 
     private String title;
@@ -8,12 +12,12 @@ public abstract class Book {
     private String genre;
     private int publicationYear;
     private int inventory;
-    private boolean borrowed;
+    private boolean borrowed; // Nos dice si el libro está fuera de stock
     private int pageCount;
 
 
     public Book(String title, String author, String isbn, String genre, int publicationYear, int inventory, int pageCount) {
-
+    // Usamos los setters para validar desde el principio
         this.setTitle(title);
         this.setAuthor(author);
         this.setIsbn(isbn);
