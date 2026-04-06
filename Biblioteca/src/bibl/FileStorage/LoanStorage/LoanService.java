@@ -3,9 +3,11 @@ package bibl.FileStorage.LoanStorage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+/**Implementación del servicio de préstamos
+ * Se encarga del historial y de realizar búsquedas administrativas.
+ */
 public class LoanService implements ILoanService {
-
+    // Histórial de todos los préstamos (activos y devueltos).
     private List<Loan> lendList;
 
     public LoanService() {
@@ -21,7 +23,8 @@ public class LoanService implements ILoanService {
             throw new IllegalArgumentException("No se pudo registrar el préstamo: El objeto es nulo o está inactivo.");
         }
     }
-
+    /**Filtra la lista para mostrar solo lo que todavía no ha regresado.
+     */
     @Override
     public void showLendBooks() {
         System.out.println("\n--- LIBROS ACTUALMENTE PRESTADOS ---");
@@ -39,7 +42,8 @@ public class LoanService implements ILoanService {
             System.out.println("Actualmente no hay ningún libro prestado en el sistema.");
         }
     }
-
+    /**Análisis de datos simple para ver tendencias de la biblioteca.
+     */
     @Override
     public void createLoanReport() {
         System.out.println("\n--- REPORTE ESTADÍSTICO DE PRÉSTAMOS ---");
@@ -50,7 +54,7 @@ public class LoanService implements ILoanService {
         }
 
         System.out.println("Total histórico de transacciones: " + this.lendList.size());
-
+// Lógica para encontrar el libro más popular
         int max = 0;
         String mostLendBook = "N/A";
 
@@ -72,18 +76,22 @@ public class LoanService implements ILoanService {
 
         System.out.println("Libro más solicitado: " + mostLendBook + " (" + max + " veces)");
 
+        // Usamos streams para un conteo rápido de los activos
         long actives = this.lendList.stream().filter(Loan::isActive).count();
         System.out.println("Préstamos pendientes de devolución: " + actives);
     }
-
+    /**Busca un préstamo activo por el título del libro para marcar su devolución
+     */
+    @Override
     public void returnLoanByBookTitle(String title) {
         boolean found = false;
 
         for (Loan loan : this.lendList) {
+            // Buscamos solo en los activos que coincidan con el título
             if (loan.isActive() && loan.getBook().getTitle().equalsIgnoreCase(title)) {
                 loan.returnBook();
                 found = true;
-                break;
+                break; // Terminamos al encontrar el primero
             }
         }
 
@@ -94,6 +102,7 @@ public class LoanService implements ILoanService {
 
     @Override
     public List<Loan> getLendList() {
+        // Protegemos la lista para que no sea modificada externamente
         return Collections.unmodifiableList(lendList);
     }
 }
