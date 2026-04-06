@@ -3,27 +3,34 @@ package bibl.user;
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Random;
-
+/**HERENCIA
+ * User extiende de Person añadiendo la faceta de "cliente"
+ */
 public class User extends Person {
 
     // ATRIBUTOS
     private LocalDate dateOfCreation;
     private String cellphone;
     private String email;
-    private String userId;
+    private String userId; //ID único que lo identifica en el sistema de préstamos
+
 
     // CONSTRUCTOR
     public User(String name, String lastName, Gender gender, String dui, LocalDate dateOfBirth, LocalDate dateOfCreation, String cellphone, String email) {
+        // Invocamos el constructor de Person para inicializar los datos básicos.
         super(name, lastName, gender, dui, dateOfBirth);
 
         this.setDateOfCreation(dateOfCreation);
         this.setCellphone(cellphone);
         this.setEmail(email);
-
+// Generamos el ID automáticamente al momento de la creación
         this.userId = createCarne();
     }
 
     // METODOS
+    /**POLIMORFISMO: Redefinimos cómo se muestra la info.
+     * No borramos lo de Person, sino que le sumamos los datos de contacto y el Carnet.
+     */
     @Override
     public void showInformation() {
         super.showInformation();
@@ -46,33 +53,23 @@ public class User extends Person {
         }
 
         Random random = new Random();
-        int randomNumber = random.nextInt(10000);
-
+        int randomNumber = random.nextInt(10000);// Rango de 0 a 9999
+// Formateamos para que siempre tenga 4 dígitos (ej: 0005)
         String formattedNumbers = String.format("%04d", randomNumber);
 
         return year + letters + formattedNumbers;
     }
 
-    // GETTERS
-    public LocalDate getDateOfCreation() { return dateOfCreation; }
-    public String getCellphone() { return cellphone; }
-    public String getEmail() { return email; }
-    public String getUserId() { return userId; }
-
-    // SETTERS
     public void setDateOfCreation(LocalDate dateOfCreation) {
-        if (dateOfCreation != null) {
-            this.dateOfCreation = dateOfCreation;
-        } else {
-            this.dateOfCreation = LocalDate.now();
-        }
+        // Si no hay fecha, el sistema le asigna la de hoy por defecto.
+        this.dateOfCreation = (dateOfCreation != null) ? dateOfCreation : LocalDate.now();
     }
 
     public void setCellphone(String cellphone) {
         if (cellphone != null && !cellphone.trim().isEmpty()) {
             this.cellphone = cellphone.trim();
         } else {
-            throw new IllegalArgumentException("El celular no puede estar vacío.");
+            throw new IllegalArgumentException("El contacto telefónico es obligatorio.");
         }
     }
 
@@ -80,7 +77,13 @@ public class User extends Person {
         if (email != null && !email.trim().isEmpty()) {
             this.email = email.trim();
         } else {
-            throw new IllegalArgumentException("El email no puede estar vacío.");
+            throw new IllegalArgumentException("El correo electrónico es necesario para notificaciones.");
         }
     }
+
+    // GETTERS
+    public LocalDate getDateOfCreation() { return dateOfCreation; }
+    public String getCellphone() { return cellphone; }
+    public String getEmail() { return email; }
+    public String getUserId() { return userId; }
 }
