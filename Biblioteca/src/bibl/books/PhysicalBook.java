@@ -1,9 +1,12 @@
 package bibl.books;
-
+/**Otra rama de HERENCIA.
+ * A diferencia del digital, aquí nos importa la ubicación física para
+ * que el bibliotecario pueda encontrarlo.
+ */
 public class PhysicalBook extends Book {
 
     private String shelfLocation;
-    private CoverType coverType;
+    private CoverType coverType; // Usamos Enums para limitar las opciones y evitar errores de dedo
 
 
     public PhysicalBook(String title, String author, String isbn, String genre, int publicationYear, int inventory, int pageCount, String shelfLocation, CoverType coverType) {
@@ -12,7 +15,10 @@ public class PhysicalBook extends Book {
         this.setShelfLocation(shelfLocation);
         this.setCoverType(coverType);
     }
-
+    /**
+     * POLIMORFISMO: Adaptamos la visualización para mostrar
+     * la estantería y el tipo de tapa.
+     */
     @Override
     public void showInfo() {
         super.showInfo();
